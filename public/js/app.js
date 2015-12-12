@@ -1,13 +1,15 @@
-'use strict'
+'use strict';
 
-var app = angular.module('WikiLinks', []);
+var app = angular.module('WikiLinksApp', []);
 
 app.controller('WikiLinksController', ['$scope', function($scope){
-	$scope.crrentlyViewing = 'startPage';
+	$scope.currentlyViewing = 'startPage';
 
-	function start(){
+	$scope.start = function(){
 		$scope.currentlyViewing = 'inputPage';
 	}
 
-	$window.sc = $scope;
+	// start;
+
+	window.sc = $scope;
 }]);
