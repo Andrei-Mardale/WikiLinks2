@@ -40,7 +40,7 @@
       </div>
     <br>
     <br>
-      <div style="text-align:left;"> Distanta minima : 5</div>
+      <div style="text-align:left;"> <button ng-show="showOptimumDistance === false" ng-click="hideButton();"> Distanta minima </button><span ng-show="showOptimumDistance === true">{{optimumDistance}}</span></div>
       <div style="text-align:right;"> Distanta parcursa : {{currentDistance}}</div>
 </div>
 </body>
