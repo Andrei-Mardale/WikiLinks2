@@ -1,13 +1,13 @@
 class WikiController < ActionController::Base
 	def get_id(params_id)
 		# params_id = params[:name]
-		@id_for_name = Article.where(:title => params_id).map(&:title)
+		@id_for_name = Article.where(:title => params_id).map(&:id)
 
 	end
 
 	def get_links(params_id)
 		# params_id = params[:id].to_i
-		@id_destinations = Link.where(:source_id =>params_id).map(&:destination_id)	
+		Link.where(:source_id =>params_id[0]).map(&:destination_id)	
 	end
 
 	def get_name(params_id)
@@ -29,7 +29,7 @@ class WikiController < ActionController::Base
 		@list_links = self.get_links(first_name)
 		@link_name=Array.new
 		@list_links.each do |t|
-			@link_name=push(Article.where(:id => t))
+			@link_name.push(Article.where(:id => t))
 		end
 		
 		render :json => {:names =>@list_name, :links => @link_name}
@@ -41,8 +41,10 @@ class WikiController < ActionController::Base
 		id_for_name=self.get_id(params_name)
 
 		@list_links=self.get_links(id_for_name)
+
+		@link_name=Array.new
 		@list_links.each do |t|
-			@link_name=push(Article.where(:id => t))
+			@link_name.push(Article.where(:id => t))
 		end
 
 		render :json => @link_name
