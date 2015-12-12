@@ -1,7 +1,7 @@
 class WikiController < ActionController::Base
 	def get_id(params_id)
 		# params_id = params[:name]
-		@id_for_name => Article.where(:title => params_id).map(&:title)
+		@id_for_name = Article.where(:title => params_id).map(&:title)
 
 	end
 
@@ -14,6 +14,7 @@ class WikiController < ActionController::Base
 		# params_id = params[:id].to_i
 		@name = Article.where(:id => params[:id])
 	end
+
 	def random_names_front
 		num1=rand(50000000)
 		num2=rand(50000000)
@@ -33,8 +34,9 @@ class WikiController < ActionController::Base
 		
 		render :json => {:names =>@list_name, :links => @link_name}
 	end 
-	def name_reurn_links_front
-		prams_name=params[:name]
+
+	def name_return_links_front
+		params_name=params[:name]
 
 		id_for_name=self.get_id(params_name)
 
