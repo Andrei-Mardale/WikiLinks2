@@ -4,7 +4,7 @@ class WikiController < ActionController::Base
 		@id_for_name => Article.where(:title => params_id).map(&:title)
 
 	end
-	def get_id_list
+	def get_links
 		params_id = params[:id].to_i
 		@id_destinations = Link.where(:source_id =>params_id).map(&:destination_id)	
 	end
