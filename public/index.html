@@ -21,16 +21,16 @@
         </div>
     </div>
 <div  ng-show="currentlyViewing==='inputPage'">
-      <div>
-        <table style="position:center;width:300px;height:150px">
+      <div  style="left:40%;top:20%;">
+        <table style="width:300px;height:150px">
             <tr >
-            <td style="text-align:center;font-weight: bold; color: #1a1818; border-width: 0px">Sursa :</td> 
-            <td style="text-align:center;font-weight: bold;color: #1a1818;  border-width: 0px"> Mos Craciun
+            <td style="font-weight: bold; color: #1a1818; border-width: 0px">Sursa :</td> 
+            <td style="font-weight: bold;color: #1a1818;  border-width: 0px"> Mos Craciun
             </td>
             </tr>
             <tr >
-            <td style="text-align:center;font-weight: bold;color: #1a1818; border-width: 0px">Destinatie :</td> 
-            <td style="text-align:center;font-weight: bold; color: #1a1818; border-width: 0px">Grumpy Cat</td>
+            <td style="font-weight: bold;color: #1a1818; border-width: 0px">Destinatie :</td> 
+            <td style="font-weight: bold; color: #1a1818; border-width: 0px">Grumpy Cat</td>
             </tr>
             </table>
       </div>
@@ -44,7 +44,7 @@
       </div>
     <br>
     <br>
-      <div style="text-align:left;"> <button ng-show="showOptimumDistance === false" ng-click="hideButton();"> Distanta minima </button><span ng-show="showOptimumDistance === true">{{optimumDistance}}</span></div>
+      <div style="text-align:left;"> <button style="border-top-left-radius:3px;border-top-right-radius:3px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;border-color:#dddddd;border-style:solid;background-color:#466a6b;color:#e8dc9e;font-size:12px;font-style:italic;font-family:'Metamorphous';text-align:center;padding-top:6px;padding-right:10px;padding-bottom:6px;padding-left:10px;left:10%;top:30%;position:absolute;width:100px;height:40px;"ng-show="showOptimumDistance === false" ng-click="hideButton();"> Distanta minima </button> <span ng-show="showOptimumDistance === true" style="color:#466a6b;font-size:20px;font-style:bold;font-family:'Metamorphous';left:10%;top:30%;">{{optimumDistance}}</span></div>
       <div style="text-align:right;"> Distanta parcursa : {{currentDistance}}</div>
 </div>
 </body>
