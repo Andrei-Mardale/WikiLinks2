@@ -8,6 +8,8 @@ app.controller('WikiLinksController', ['$scope', function($scope){
 	$scope.currentDistance = 0;
 	$scope.optimumDistance = 5;
 	$scope.showOptimumDistance = false;
+	$scope.links  = [];
+
 	$scope.start = function(){
 		$scope.currentlyViewing = 'inputPage';
 	}
