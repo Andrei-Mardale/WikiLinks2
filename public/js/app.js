@@ -2,7 +2,7 @@
 
 var app = angular.module('WikiLinksApp', []);
 
-app.controller('WikiLinksController', ['$scope', '$timeout', function($scope, $timeout){
+app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($scope, $timeout,$http){
 	$scope.currentlyViewing = 'startPage';
 	$scope.searchInput = '';
 	$scope.currentDistance = 0;
@@ -17,6 +17,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout', function($scope, $t
           .success(function(data, status, headers, config) {
             $scope.source =  data["names"][0][0]["title"];
             $scope.destination =  data["names"][1][0]["title"];
+            console.log(data);
 
           })
           .error(function(data, status, headers, config) {
@@ -33,7 +34,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout', function($scope, $t
 
 	function hideButton(){
 		$scope.showOptimumDistance = true;
-		$timeout(showButton, 3000);
+		$timeout(showButton, 2000);
 	}
 	$scope.hideButton = hideButton;
 
