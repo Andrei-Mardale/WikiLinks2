@@ -22,7 +22,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout', function($scope, $t
 	function hideButton(){
 		$scope.showOptimumDistance = true;
 
-		$timeout(showButton, 5000);
+		$timeout(showButton, 3000);
 	}
 	$scope.hideButton = hideButton;
 
