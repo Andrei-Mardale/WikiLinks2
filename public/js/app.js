@@ -6,7 +6,10 @@ app.controller('WikiLinksController', ['$scope', function($scope){
 	$scope.currentlyViewing = 'startPage';
 	$scope.searchInput = '';
 	$scope.currentDistance = 0;
+	$scope.optimumDistance = 5;
+	$scope.showOptimumDistance = false;
 	$scope.links  = [];
+
 	$scope.start = function(){
 		$scope.currentlyViewing = 'inputPage';
 	}
@@ -15,6 +18,11 @@ app.controller('WikiLinksController', ['$scope', function($scope){
 	}
 	$scope.addOption = addOption;
 	// start;
+
+	function hideButton(){
+		$scope.showOptimumDistance = true;
+	}
+	$scope.hideButton = hideButton;
 
 	window.sc = $scope;
 }]);
