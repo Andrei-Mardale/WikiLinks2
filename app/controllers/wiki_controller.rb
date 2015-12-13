@@ -87,7 +87,7 @@ class WikiController < ActionController::Base
 	end
 
 
-def haveMet (id, currentDist, idHash)
+	def haveMet (id, currentDist, idHash)
 		pos = id % 5000;
 		list = idHash[pos];
 
