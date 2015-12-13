@@ -26,7 +26,7 @@ class WikiController < ActionController::Base
 		startPoint = get_random_entry()
 		endPoint = get_random_entry()
 
-		list_name = [startPoint, endPoint]
+		@list_name = [startPoint, endPoint]
 
 		puts get_id(startPoint)
 		
@@ -40,7 +40,6 @@ class WikiController < ActionController::Base
 		end
 
 		puts destNames
-		
 		render :json => {:names =>@list_name, :links => @link_name}
 	end 
 
