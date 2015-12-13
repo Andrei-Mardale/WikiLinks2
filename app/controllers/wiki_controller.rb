@@ -98,7 +98,12 @@ def haveMet (id, currentDist, idHash)
 		queue = Array.new;
 
 		haveMet(startId, -1, hash);
-		queue.concat(get_links(startId));
+
+		nextIds = get_links(startId);
+		nextIds.each do |id|
+			haveMet(id, 0, hash);
+			queue.push(id);
+		end
 
 		while queue.any? do
 			currentId = queue.shift;
