@@ -60,6 +60,32 @@ class WikiController < ActionController::Base
 
 		render :json => @link_name
 	end
+	def cale_random_front
+		startPoint = get_random_entry()
+
+		random_link=get_id(startPoint)
+
+		# @link_name=name_return_links_front
+		links=get_links(random_link)
+		@link_name = Array.new
+		links.each do |t|
+			if (name=get_name(t))!=[]
+				@link_name.push(name)
+			end
+		end
+		number_of_iter=rand(3..14)
+		i=0
+		while i<number_of_iter do
+			random_number = rand(links.length-1)
+			links=get_links(links[random_number])
+			i+=1
+		end
+
+		endPoint = get_name(links[random_number])
+		@list_name = [startPoint, endPoint]
+		render :json => {:names =>@list_name, :links => @link_name}
+	end
+
 
 def haveMet (id, currentDist, idHash)
 		pos = id % 5000;
