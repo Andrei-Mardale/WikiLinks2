@@ -13,6 +13,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.destination="";
 	$scope.visited=[];
 	$scope.currentLocation='';
+	$scope.playing = true;
 	$scope.percentage = 0;
 	$scope.shortDist=[];
 	$scope.corect = 0;
@@ -46,7 +47,6 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 
 	}
 	$scope.addOption = addOption;
-	// start;
 
 	function hideButton(){
 		$scope.showOptimumDistance = true;
@@ -88,6 +88,13 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
         $scope.visited.push(link);
 	}
 	$scope.choice = choice;
+
+	function restart(){
+		$scope.playing = true;
+
+		this.start();
+	}
+	$scope.restart = restart;
 
 	window.sc = $scope;
 }]);
