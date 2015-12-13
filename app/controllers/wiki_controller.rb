@@ -51,7 +51,7 @@ class WikiController < ActionController::Base
 		@list_links=self.get_links(id_for_name)
 		@link_name = Array.new
 		@list_links.each do |t|
-			@link_name.push(self.get_name(t).map(&:title))
+			@link_name.push(self.get_name(t))
 		end
 
 		render :json => @link_name
