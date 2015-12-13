@@ -13,7 +13,9 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.destination="";
 	$scope.visited=[];
 	$scope.currentLocation='';
-
+	$scope.percentage = 0;
+	$scope.shortDist=[];
+	$scope.corect = 0;
 	$scope.start = function(){
 		$scope.currentlyViewing = 'inputPage';
 		$http.get('/random')
@@ -21,8 +23,9 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
             $scope.source =  data["names"][0];
             $scope.destination =  data["names"][1];
             $scope.links = data["links"];
+            $scope.optimumDistance = data["distance"];
             console.log(data);
-
+            $scope.shortDist = data["path"];
             $scope.currentLocation = $scope.source;
           })
           .error(function(data, status, headers, config) {
@@ -52,7 +55,14 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 		$scope.links = [];
 		var endpoint = '/' + link;
 
-		console.log('endpoint'+endpoint);
+		//console.log('endpoint'+endpoint);
+		var i;
+		for (i = 0; i < $scope.shortDist.length; ++i) {
+			if (link === $scope.shortDist[i]) {
+				$scope.corect++;	
+				break;
+			}
+		}
 
 		$http.get(endpoint)
           .success(function(data, status, headers, config) {
@@ -61,6 +71,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
           .error(function(data, status, headers, config) {
             console.log('Error .');
           });
+          $scope.percentage = $scope.corect / $scope.optimumDistance * 100;
 
         $scope.currentDistance++;
 
