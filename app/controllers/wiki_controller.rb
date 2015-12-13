@@ -22,44 +22,17 @@ class WikiController < ActionController::Base
 		get_name(@allIds[rand(@allIds.size)])
 	end
 
-	def random_names_front
-		startPoint = get_random_entry()
-		endPoint = get_random_entry()
-
-		@list_name = [startPoint, endPoint]
-
-		puts get_id(startPoint)
-		
-		destIds = get_links(get_id(startPoint))
-
-		puts destIds
-
-		destNames = Array.new
-		destIds.each do |t|
-			if (name=get_name(t))!=[]
-				destNames.push(name)
-			end
-		end
-		@link_name = destNames
-
-		render :json => {:names =>@list_name, :links => @link_name}
-	end 
-
 	def name_return_links_front
 		params_name=params[:name]
 
-		id_for_name=self.get_id(params_name)
+		id_for_name = get_id(params_name)
 
-		@list_links=self.get_links(id_for_name)
-		@link_name = Array.new
-		@list_links.each do |t|
-			if (name=get_name(t))!=[]
-				@link_name.push(name)
-			end
-		end
+		destIds = get_links(id_for_name)
+		@link_name = destIds.map{|t| get_name(t)}.compact
 
 		render :json => @link_name
 	end
+
 	def cale_random_front
 		startPoint = get_random_entry()
 
@@ -82,28 +55,32 @@ class WikiController < ActionController::Base
 
 		endPoint = get_name(links[randomNumber])
 		@list_name = [startPoint, endPoint]
-		@distance = bfs(get_id(startPoint).to_i, links[randomNumber].to_i)
-		render :json => {:names =>@list_name, :links => @link_name, :distance => @distance}
+		@pathData = bfs(get_id(startPoint).to_i, links[randomNumber].to_i)
+		render :json => {:names =>@list_name, 
+						 :links => @link_name, 
+						 :distance => @pathData[:distance],
+						 :path => @pathData[:path]
+						}
 	end
 
 
-	def haveMet (id, currentDist, idHash)
-		pos = id % 5000;
+	def haveMet (destId, srcId, currentDist, idHash)
+		pos = destId % 5000;
 		list = idHash[pos];
 
 		if (idHash[pos] === nil) 
 			idHash[pos] = Array.new
-			idHash[pos].push([id, currentDist + 1])
+			idHash[pos].push([destId, currentDist + 1, srcId])
 			return false;
 		end
 
 		idHash[pos].each do |l|
-			if (l[0] === id) 
+			if (l[0] === destId) 
 				return true;
 			end
 		end
 
-		idHash[pos].push([id, currentDist + 1])
+		idHash[pos].push([destId, currentDist + 1, srcId])
 		return false;
 	end
 
@@ -119,39 +96,61 @@ class WikiController < ActionController::Base
 		return -9999
 	end
 
+	def getPrev (id, idHash)
+		puts id
+		pos = id % 5000;
+			idHash[pos].each do |l|
+				if (l[0] === id)
+					return l[2];
+				end
+			end
+
+		return -9999
+	end
+
 	def bfs (startId, endId)
-		puts "ASdadasdasa"
-		puts startId
-		puts endId
-		puts "asdasddasdsdasdas"
 		hash = Array.new(5000);
 		queue = Array.new;
 
-		haveMet(startId, -1, hash);
+		haveMet(startId, -1, -1, hash);
 
 		nextIds = get_links(startId);
 		nextIds.each do |id|
-			haveMet(id, 0, hash);
+			haveMet(id, startId, 0, hash);
 			queue.push(id);
 		end
 
-		while queue.any? do
+		finalDist = 0
+		while (queue.any? && finalDist === 0) do
 			currentId = queue.shift;
 			currentDist = getDist(currentId, hash)
 
 			nextIds = get_links(currentId);
 			nextIds.each do |id|
 				if (id === endId)
-					return currentDist + 1
+					haveMet(id, currentId, currentDist, hash)
+					finalDist = currentDist + 1
+					break;
 				else
-					if (!(haveMet(id, currentDist, hash)))
+					if (!(haveMet(id, currentId, currentDist, hash)))
 						queue.push(id);
 					end
 				end
 			end
 		end
 
-		return -1
+		path = Array.new
+
+		currentId = endId
+		while (currentId > 0)
+			path.unshift(get_name(currentId))
+			currentId = getPrev(currentId, hash)
+			puts "CURRENT ID: " + currentId.to_s
+		end
+
+		puts path
+
+		return {:distance => finalDist, :path => path}
 	end
 
 end
