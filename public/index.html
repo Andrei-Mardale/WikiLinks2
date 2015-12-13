@@ -49,14 +49,14 @@
     </div>
 </div>
   <div style="height:50px">
-      <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:60%;top:25%;font-size:16px;"> Distanta parcursa : {{currentDistance}}</div>
+      <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:60%;top:30%;font-size:16px;"> Distanta parcursa : {{currentDistance}}</div>
 
       <button type="button" class="btn btn-default btn-lg" ng-show="showOptimumDistance === false" ng-click="hideButton();" style="background-color:#466a6b;color:#e8dc9e;background-color:#466a6b;color:#e8dc9e;font-size:16px;font-style:italic;font-family:'Metamorphous';text-align:center;">
         <span class="glyphicon glyphicon-search" aria-hidden="true"> Distanta minima</span> 
       </button>
 
 
-      <span ng-show="showOptimumDistance === true" style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:10%;top:20%;">{{optimumDistance}}</span>
+      <span ng-show="showOptimumDistance === true" style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:10%;top:30%;">{{optimumDistance}}</span>
     </div>
 
     <div class="list-group col-md-4" ng-show="currentDistance > 0;">
@@ -80,7 +80,11 @@
       <div align="center">
       <h1>FELICITARI!</h1>
       <h3>Ai castigat!</h3>
-      <h3>Ai reusit sa termini jocul in {{currentDistance}} mutari </h3>
+      <h3>Ai reusit sa termini jocul in {{currentDistance}} mutari !</h3>
+      
+      <br>
+      <br>
+      <h3>Vrei sa mai joci ?</h3>
       <input type="button" class="btn btn-primary btn-lg" value="RESTART" ng-click="restart();"/>
 
       </div>
