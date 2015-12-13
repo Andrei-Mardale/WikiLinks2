@@ -1,37 +1,40 @@
 class WikiController < ActionController::Base
 	def get_id(params_id)
 		# params_id = params[:name]
-		@id_for_name = Article.where(:title => params_id).map(&:title)
+		Article.where(:title => params_id).map(&:id)
 
 	end
 
 	def get_links(params_id)
-
-		Link.where(:source_id =>params_id).map(&:destination_id)
+		Link.where(:source_id => params_id).map(&:destination_id)
 	end
 
 	def get_name(params_id)
 		# params_id = params[:id].to_i
-		@name = Article.where(:id => params_id)
+		Article.where(:id => params_id.to_i).map(&:title)
+	end
+
+	def get_random_entry ()
+		if (@allIds === nil)
+			@allIds = Article.pluck(:id);
+		end
+
+		get_name(@allIds[rand(@allIds.size)])
 	end
 
 	def random_names_front
-		num1=rand(10)
-		num2=rand(10)
-		while num1==num2
-			num2=rand(10)
-		end	
+		first_name = get_random_entry()
+		second_name = get_random_entry()
+		
+		#puts second_name
+		#@list_name =[first_name,second_name]
 
-		first_name = self.get_name(num1)
-		second_name = self.get_name(num2)
-		@list_name =[first_name,second_name]
+		#@list_links = self.get_links(first_name)
+		#@link_name=Array.new
+		#@list_links.each do |t|
 
-		@list_links = self.get_links(first_name)
-		@link_name=Array.new
-		@list_links.each do |t|
-
-			@link_name.push(self.get_name(t).map(&:title))
-		end
+		#	@link_name.push(self.get_name(t).map(&:title))
+		#end
 		
 		render :json => {:names =>@list_name, :links => @link_name}
 	end 
