@@ -13,7 +13,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.destination="";
 	$scope.visited=[];
 	$scope.currentLocation='';
-	$scope.playing = false;
+	$scope.playing = true;
 	$scope.percentage = 0;
 	$scope.shortDist=[];
 	$scope.corect = 0;
