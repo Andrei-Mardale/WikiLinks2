@@ -99,21 +99,6 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.choice = choice;
 
 	function restart(){
-<<<<<<< HEAD
-		$scope.searchInput = '';
-	$scope.currentDistance = 0;
-	$scope.optimumDistance = 5;
-	$scope.showOptimumDistance = false;
-	$scope.links  = [];
-	$scope.source="";
-	$scope.destination="";
-	$scope.visited=[];
-	$scope.currentLocation='';
-	$scope.playing = true;
-	$scope.percentage = 0;
-	$scope.shortDist=[];
-	$scope.corect = 0;
-=======
 		$scope.playing = true;
 			$scope.currentDistance = 0;
 		$scope.optimumDistance = 0;
@@ -128,7 +113,6 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 		$scope.shortDist=[];
 		$scope.corect = 0;
 		$scope.chosen = [];
->>>>>>> da59da13dc2513669e8f7ba70462c3bf3329b3cc
 
 		this.start();
 	}
