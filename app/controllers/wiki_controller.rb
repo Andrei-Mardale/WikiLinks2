@@ -66,22 +66,21 @@ class WikiController < ActionController::Base
 		random_link=get_id(startPoint)
 
 		# @link_name=name_return_links_front
-		links=get_links(random_link)
-		@link_name = Array.new
-		links.each do |t|
-			if (name=get_name(t))!=[]
-				@link_name.push(name)
-			end
-		end
+		links=get_links(random_link).compact
+		@link_name = links.map{|t| get_name(t)}
+	
 		number_of_iter=rand(3..14)
 		i=0
-		while i<number_of_iter do
-			random_number = rand(links.length-1)
-			links=get_links(links[random_number])
-			i+=1
+		while i<number_of_iter do-1
+			randomNumber = rand(links.length - 1)
+			links = get_links(links[randomNumber])
+			
+			i += 1;
 		end
+		
+		randomNumber = rand(links.length - 1)
 
-		endPoint = get_name(links[random_number])
+		endPoint = get_name(links[randomNumber])
 		@list_name = [startPoint, endPoint]
 		render :json => {:names =>@list_name, :links => @link_name}
 	end
