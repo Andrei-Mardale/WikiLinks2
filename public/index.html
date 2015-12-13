@@ -72,11 +72,6 @@
         <h4 align="center">Alegeti urmatoarea pagina :</h4>
         <div class="list-group-item" style="cursor:pointer;" ng-repeat="link in links track by $index" ng-click="choice(link);">{{link}}</div>
       </div>
-<<<<<<< HEAD
-</div>
-=======
-
-
     </div>
   </div>
   <div ng-show="playing === false">
@@ -85,11 +80,12 @@
       <div align="center">
       <h1>FELICITARI!</h1>
       <h3>Ai castigat!</h3>
-      <input type="button" class="btn btn-primary btn-lg" value="START" ng-click="restart();"/>
+      <h3>Ai reusit sa termini jocul in {{currentDistance}} mutari </h3>
+      <input type="button" class="btn btn-primary btn-lg" value="RESTART" ng-click="restart();"/>
+
       </div>
     </div>
     </div>
   </div>
->>>>>>> ded2c6dd84daef71838c0948fec7f7ed2061bf0c
 </body>
 </html>

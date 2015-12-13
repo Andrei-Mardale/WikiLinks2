@@ -4,9 +4,8 @@ var app = angular.module('WikiLinksApp', []);
 
 app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($scope, $timeout,$http){
 	$scope.currentlyViewing = 'startPage';
-	$scope.searchInput = '';
 	$scope.currentDistance = 0;
-	$scope.optimumDistance = 5;
+	$scope.optimumDistance = 0;
 	$scope.showOptimumDistance = false;
 	$scope.links  = [];
 	$scope.source="";
@@ -91,6 +90,19 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 
 	function restart(){
 		$scope.playing = true;
+			$scope.currentDistance = 0;
+		$scope.optimumDistance = 0;
+		$scope.showOptimumDistance = false;
+		$scope.links  = [];
+		$scope.source="";
+		$scope.destination="";
+		$scope.visited=[];
+		$scope.currentLocation='';
+		$scope.playing = true;
+		$scope.percentage = 0;
+		$scope.shortDist=[];
+		$scope.corect = 0;
+		$scope.chosen = [];
 
 		this.start();
 	}
