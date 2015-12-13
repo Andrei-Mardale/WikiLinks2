@@ -109,7 +109,7 @@ def haveMet (id, currentDist, idHash)
 				if (id === endId)
 					return currentDist + 1
 				else
-					if (!(haveMet(id, currentDist, hash))
+					if (!(haveMet(id, currentDist, hash)))
 						queue.push(id);
 					end
 				end
