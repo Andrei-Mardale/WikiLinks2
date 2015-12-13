@@ -4,22 +4,27 @@
     <title>WikiLinks</title>
      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
      <script type="text/javascript" src="js/app.js"></script>
-     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
+     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
      <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
   </head>
 
   <body ng-controller="WikiLinksController" style="background-color:#dae0e6">
     <div ng-show="currentlyViewing==='startPage'">
+
         <div class="jumbotron">
-          <div style="font-size:20px;font-style:italic;font-family:'Metamorphous';left:35%;top:15%;position:absolute;width:500px;height:30px;"> Welcome to the WikiLinkGame ! </div>
-          <div style="font-size:18px;font-style:italic;font-family:'Metamorphous';left:37%;top:30%;position:absolute;width:300px;height:30px;">
+        <div class="container">
+          <div> Welcome to the WikiLinkGame ! </div>
+          <div>
           Press the START button .
           </div>
             <div >
-                <input type="button" style=";z-index:10001;border-top-width:0px;border-bottom-width:0px;border-left-width:0px;border-right-width:0px;border-top-left-radius:3px;border-top-right-radius:3px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;border-color:#dddddd;border-style:solid;background-color:#466a6b;color:#e8dc9e;font-size:22px;font-style:italic;font-family:'Metamorphous';text-align:center;box-shadow:0 1px 2px rgba(0, 0, 0, 0.4);-o-box-shadow:0 1px 2px rgba(0, 0, 0, 0.4);-webkit-box-shadow:0 1px 2px rgba(0, 0, 0, 0.4);background-size:auto;background-repeat:repeat;background-position:center center;padding-top:6px;padding-right:10px;padding-bottom:6px;padding-left:10px;left:40%;top:40%;position:absolute;width:150px;height:70px;" class="StartButton" value="START" ng-click="start();"/>
+                <input type="button" class="btn btn-primary btn-lg" value="START" ng-click="start();"/>
 
             </div>
+        </div>
         </div>
     </div>
 <div  ng-show="currentlyViewing==='inputPage'">
