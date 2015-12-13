@@ -38,7 +38,7 @@ class WikiController < ActionController::Base
 		destIds.each do |t|
 			destNames.push(get_name(t))
 		end
-
+		@link_name=destNames
 		puts destNames
 		render :json => {:names =>@list_name, :links => @link_name}
 	end 

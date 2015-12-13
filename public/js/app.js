@@ -15,8 +15,8 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 		$scope.currentlyViewing = 'inputPage';
 		$http.get('/random')
           .success(function(data, status, headers, config) {
-            $scope.source =  data["names"];
-            $scope.destination =  data["links"];
+            $scope.source =  data["names"][0][0];
+            $scope.destination =  data["names"][1][0];
             console.log(data);
 
           })
