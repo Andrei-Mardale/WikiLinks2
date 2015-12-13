@@ -18,7 +18,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.shortDist=[];
 	$scope.corect = 0;
 
-	var pleaseWaitDiv = $('<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress-bar"></div></div></div>');
+	var pleaseWaitDiv = $('<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header" style="color:white"><h1>Processing...</h1></div><div class="modal-body"><div class="progress-bar"></div></div></div>');
 
 	$scope.start = function(){
 		$scope.currentlyViewing = 'inputPage';
@@ -58,9 +58,17 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	}
 
 	function choice(link){
-		$scope.currentLocation = link;
-		$scope.links = [];
-		var endpoint = '/' + link;
+		if($scope.destination === link){
+			$scope.currentDistance++;
+			$scope.visited.push(link);
+			$scope.percentage=100;
+
+			$scope.playing = false;
+		}
+		else{
+			$scope.currentLocation = link;
+			$scope.links = [];
+			var endpoint = '/' + link;
 
 		//console.log('endpoint'+endpoint);
 		var i;
@@ -72,22 +80,35 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 		}
 
 		$http.get(endpoint)
-          .success(function(data, status, headers, config) {
-            $scope.links = data;
-          })
-          .error(function(data, status, headers, config) {
-            console.log('Error .');
-          });
-          $scope.percentage = $scope.corect / $scope.optimumDistance * 100;
+		.success(function(data, status, headers, config) {
+			$scope.links = data;
+		})
+		.error(function(data, status, headers, config) {
+			console.log('Error .');
+		});
+		$scope.percentage = $scope.corect / $scope.optimumDistance * 100;
 
-        $scope.currentDistance++;
+		$scope.currentDistance++;
 
-        $scope.visited.push(link);
+		$scope.visited.push(link);
 	}
+}
 	$scope.choice = choice;
 
 	function restart(){
-		$scope.playing = true;
+		$scope.searchInput = '';
+	$scope.currentDistance = 0;
+	$scope.optimumDistance = 5;
+	$scope.showOptimumDistance = false;
+	$scope.links  = [];
+	$scope.source="";
+	$scope.destination="";
+	$scope.visited=[];
+	$scope.currentLocation='';
+	$scope.playing = true;
+	$scope.percentage = 0;
+	$scope.shortDist=[];
+	$scope.corect = 0;
 
 		this.start();
 	}
