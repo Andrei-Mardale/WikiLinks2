@@ -36,7 +36,9 @@ class WikiController < ActionController::Base
 
 		destNames = Array.new
 		destIds.each do |t|
-			destNames.push(get_name(t))
+			if (name=get_name(t))!=[]
+				destNames.push(name)
+			end
 		end
 		@link_name = destNames
 
@@ -51,7 +53,9 @@ class WikiController < ActionController::Base
 		@list_links=self.get_links(id_for_name)
 		@link_name = Array.new
 		@list_links.each do |t|
-			@link_name.push(self.get_name(t))
+			if (name=get_name(t))!=[]
+				@link_name.push(name)
+			end
 		end
 
 		render :json => @link_name
