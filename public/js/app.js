@@ -14,14 +14,21 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.visited=[];
 	$scope.currentLocation='';
 
+	var pleaseWaitDiv = $('<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress-bar"></div></div></div>');
+
 	$scope.start = function(){
 		$scope.currentlyViewing = 'inputPage';
+
+		pleaseWaitDiv.modal();
+
 		$http.get('/random')
           .success(function(data, status, headers, config) {
             $scope.source =  data["names"][0];
             $scope.destination =  data["names"][1];
             $scope.links = data["links"];
             console.log(data);
+
+           	pleaseWaitDiv.modal('hide');
 
             $scope.currentLocation = $scope.source;
           })
