@@ -16,8 +16,14 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.percentage = 0;
 	$scope.shortDist=[];
 	$scope.corect = 0;
+
+	var pleaseWaitDiv = $('<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress-bar"></div></div></div>');
+
 	$scope.start = function(){
 		$scope.currentlyViewing = 'inputPage';
+
+		pleaseWaitDiv.modal();
+
 		$http.get('/random')
           .success(function(data, status, headers, config) {
             $scope.source =  data["names"][0];
@@ -26,6 +32,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
             $scope.optimumDistance = data["distance"];
             console.log(data);
             $scope.shortDist = data["path"];
+           	pleaseWaitDiv.modal('hide');
             $scope.currentLocation = $scope.source;
           })
           .error(function(data, status, headers, config) {
