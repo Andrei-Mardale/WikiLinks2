@@ -1,17 +1,17 @@
 class WikiController < ActionController::Base
-	def get_id(params_id)
+	def get_id(title)
 		# params_id = params[:name]
-		Article.where(:title => params_id).map(&:id)
+		Article.where(:title => title).map(&:id)
 
 	end
 
-	def get_links(params_id)
-		Link.where(:source_id => params_id).map(&:destination_id)
+	def get_links(sourceId)
+		Link.where(:source_id => sourceId).map(&:destination_id)
 	end
 
-	def get_name(params_id)
+	def get_name(id)
 		# params_id = params[:id].to_i
-		Article.where(:id => params_id.to_i).map(&:title)
+		Article.where(:id => id).map(&:title)
 	end
 
 	def get_random_entry ()
@@ -23,18 +23,23 @@ class WikiController < ActionController::Base
 	end
 
 	def random_names_front
-		first_name = get_random_entry()
-		second_name = get_random_entry()
+		startPoint = get_random_entry()
+		endPoint = get_random_entry()
+
+		list_name = [startPoint, endPoint]
+
+		puts get_id(startPoint)
 		
-		#puts second_name
-		#@list_name =[first_name,second_name]
+		destIds = get_links(get_id(startPoint))
 
-		#@list_links = self.get_links(first_name)
-		#@link_name=Array.new
-		#@list_links.each do |t|
+		puts destIds
 
-		#	@link_name.push(self.get_name(t).map(&:title))
-		#end
+		destNames = Array.new
+		destIds.each do |t|
+			destNames.push(get_name(t))
+		end
+
+		puts destNames
 		
 		render :json => {:names =>@list_name, :links => @link_name}
 	end 
