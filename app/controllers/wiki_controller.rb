@@ -57,7 +57,7 @@ class WikiController < ActionController::Base
 		render :json => @link_name
 	end
 
-	def haveMet (id, currentDist, idHash)
+def haveMet (id, currentDist, idHash)
 		pos = id % 5000;
 		list = idHash[pos];
 
@@ -67,7 +67,7 @@ class WikiController < ActionController::Base
 			return false;
 		end
 
-		idHash[pos].length.times do |l|
+		idHash[pos].each do |l|
 			if (l[0] === id) 
 				return true;
 			end
@@ -77,12 +77,42 @@ class WikiController < ActionController::Base
 		return false;
 	end
 
+	def getDist (id, idHash)
+		pos = id % 5000;
+
+		idHash[pos].each do |l|
+			if (l[0] === id)
+				return l[1];
+			end
+		end
+
+		return -9999
+	end
+
 	def bfs (startId, endId)
 		hash = Array.new(5000);
 		queue = Array.new;
 
+		haveMet(startId, -1, hash);
 		queue.concat(get_links(startId));
 
+		while queue.any? do
+			currentId = queue.shift;
+			currentDist = getDist(currentId, hash)
+
+			nextIds = get_links(currentId);
+			nextIds.each do |id|
+				if (id === endId)
+					return currentDist + 1
+				else
+					if (!(haveMet(id, currentDist, hash))
+						queue.push(id);
+					end
+				end
+			end
+		end
+
+		return -1
 	end
 
 end
