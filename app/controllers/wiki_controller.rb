@@ -27,8 +27,8 @@ class WikiController < ActionController::Base
 
 		id_for_name = get_id(params_name)
 
-		destIds = get_links(id_for_name)
-		@link_name = destIds.map{|t| get_name(t)}.compact
+		destIds = get_links(id_for_name).compact
+		@link_name = destIds.map{|t| get_name(t)}
 
 		render :json => @link_name
 	end

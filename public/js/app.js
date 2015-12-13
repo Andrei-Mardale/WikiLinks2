@@ -100,7 +100,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 
 	function restart(){
 		$scope.playing = true;
-			$scope.currentDistance = 0;
+		$scope.currentDistance = 0;
 		$scope.optimumDistance = 0;
 		$scope.showOptimumDistance = false;
 		$scope.links  = [];
