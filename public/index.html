@@ -13,14 +13,14 @@
 
   <body ng-controller="WikiLinksController" style="background-color:#dae0e6">
     <div ng-show="currentlyViewing==='startPage'">
-
+        <div class="container" >
         <div class="jumbotron">
-        <div class="container">
-          <div> Welcome to the WikiLinkGame ! </div>
-          <div>
+        
+          <h2 align="center"> Welcome to the WikiLinkGame ! </h2>
+          <p align="center">
           Press the START button .
-          </div>
-            <div >
+          </p>
+            <div align="center" >
                 <input type="button" class="btn btn-primary btn-lg" value="START" ng-click="start();"/>
 
             </div>
@@ -28,8 +28,9 @@
         </div>
     </div>
 <div  ng-show="currentlyViewing==='inputPage'">
-      <div >
-        <table style="height:150px;position:absolute;left:30%;top:10%;">
+      <div class="container" >
+        <div class="jumbotron">
+        <table style="position:absolute;left:30%;top:10%;">
             <tr >
             <td style="font-weight: bold; color: #1a1818; border-width: 0px">Sursa :</td> 
             <td style="width:200px;font-style: italic;color: #1a1818;  border-width: 0px"> {{source}}
@@ -39,6 +40,7 @@
             </tr>
             </table>
       </div>
+    </div>
       <div ng-show="currentDistance > 0;">
           <div ng-repeat="entry in visited track by $index" ng-click="visit(entry);">{{entry}}</div>
       </div>
@@ -48,7 +50,11 @@
       <div>
         <div style="cursor:pointer;" ng-repeat="link in links track by $index" ng-click="choice(link[0]);">{{link[0]}}</div>
       </div>
-
+      <div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+     60%
+    </div>
+</div>
       <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:70%;top:53%;"> Distanta parcursa : {{currentDistance}}</div>
       
       <button style="border-top-left-radius:3px;border-top-right-radius:3px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;border-color:#dddddd;border-style:solid;background-color:#466a6b;color:#e8dc9e;font-size:16px;font-style:italic;font-family:'Metamorphous';text-align:center;padding-top:6px;padding-right:10px;padding-bottom:6px;padding-left:10px;left:10%;top:50%;position:absolute;width:170px;height:50px;text-align:center" ng-show="showOptimumDistance === false" ng-click="hideButton();"> Distanta minima </button> 
