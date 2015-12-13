@@ -32,6 +32,15 @@
             </tr>
             </table>
       </div>
+      <div ng-show="currentDistance > 0;">
+          <div ng-repeat="entry in visited track by $index" ng-click="visit(entry);">{{entry}}</div>
+      </div>
+
+      <div>!current{{currentLocation}}</div>
+
+      <div>
+        <div style="cursor:pointer;" ng-repeat="link in links track by $index" ng-click="choice(link[0]);">{{link[0]}}</div>
+      </div>
       <div>
         <div style="position:absolute;left:10%;top:35%;">
         <form>
