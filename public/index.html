@@ -1,69 +1,70 @@
 <!DOCTYPE html>
 <html ng-app="WikiLinksApp">
-  <head>
-    <title>WikiLinks</title>
-     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-     <script type="text/javascript" src="js/app.js"></script>
-     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<head>
+  <title>WikiLinks</title>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-  </head>
+</head>
 
-  <body ng-controller="WikiLinksController" style="background-color:#dae0e6">
+<body ng-controller="WikiLinksController" style="background-color:#dae0e6">
+  <div ng-show="playing === true">
     <div ng-show="currentlyViewing==='startPage'">
-        <div class="container" >
-        <div class="jumbotron">
-        
-          <h2 align="center"> Welcome to the WikiLinkGame ! </h2>
-          <p align="center">
-          Press the START button .
-          </p>
-            <div align="center" >
-                <input type="button" class="btn btn-primary btn-lg" value="START" ng-click="start();"/>
-
-            </div>
-        </div>
-        </div>
-    </div>
-<div  ng-show="currentlyViewing==='inputPage'">
       <div class="container" >
         <div class="jumbotron">
-        <table style="position:absolute;left:30%;top:10%;">
-            <tr >
-            <td style="font-weight: bold; color: #1a1818; border-width: 0px ;font-size:13px">Sursa :  </td> 
-            <td style="width:200px;font-style: italic;color: #1a1818;  border-width: 0px"> {{source}}
-            </td>
-            <td style="font-weight: bold;color: #1a1818; border-width: 0px;font-size:13p">Destinatie :  </td> 
-            <td style="font-style: italic; color: #1a1818; border-width: 0px">{{destination}}</td>
-            </tr>
-            </table>
+
+          <h2 align="center"> Welcome to the WikiLinkGame ! </h2>
+          <p align="center">
+            Press the START button .
+          </p>
+          <div align="center" >
+            <input type="button" class="btn btn-primary btn-lg" value="START" ng-click="start();"/>
+
+          </div>
+        </div>
       </div>
     </div>
+    <div  ng-show="currentlyViewing==='inputPage'">
+      <div class="container" >
+        <div class="jumbotron">
+          <table style="position:absolute;left:30%;top:10%;">
+            <tr >
+              <td style="font-weight: bold; color: #1a1818; border-width: 0px ;font-size:13px">Sursa :  </td> 
+              <td style="width:200px;font-style: italic;color: #1a1818;  border-width: 0px"> {{source}}
+              </td>
+              <td style="font-weight: bold;color: #1a1818; border-width: 0px;font-size:13p">Destinatie :  </td> 
+              <td style="font-style: italic; color: #1a1818; border-width: 0px">{{destination}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
 
       <div class="progress">
-    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-     {{currentDistance}}/{{optimumDistance}}
-    </div>
-</div>
-  <div style="height:50px">
-      <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:60%;top:35%;"> Distanta parcursa : {{currentDistance}}</div>
+        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+         {{currentDistance}}/{{optimumDistance}}
+       </div>
+     </div>
+     <div style="height:50px">
+      <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:60%;top:20%;"> Distanta parcursa : {{currentDistance}}</div>
 
       <button type="button" class="btn btn-default btn-lg" ng-show="showOptimumDistance === false" ng-click="hideButton();" style="background-color:#466a6b;color:#e8dc9e;background-color:#466a6b;color:#e8dc9e;font-size:16px;font-style:italic;font-family:'Metamorphous';text-align:center;">
-  <span class="glyphicon glyphicon-search" aria-hidden="true"> Distanta minima</span> 
+        <span class="glyphicon glyphicon-search" aria-hidden="true"> Distanta minima</span> 
       </button>
-      
-    
-      <span ng-show="showOptimumDistance === true" style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:10%;top:35%;">{{optimumDistance}}</span>
-    </div>
-    
-      <div class="list-group col-md-4" ng-show="currentDistance > 0;">
-          <h4 align="center" >Paginile accesate :</h4>
-          <div class="list-group-item" ng-repeat="entry in visited track by $index" ng-click="visit(entry);">{{entry}}</div>
-      </div>
 
-      <div class="list-group col-md-4"><h4 align="center">Pagina curenta :</h4>
+
+      <span ng-show="showOptimumDistance === true" style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:10%;top:20%;">{{optimumDistance}}</span>
+    </div>
+
+    <div class="list-group col-md-4" ng-show="currentDistance > 0;">
+      <h4 align="center" >Paginile accesate :</h4>
+      <div class="list-group-item" ng-repeat="entry in visited track by $index" ng-click="visit(entry);">{{entry}}</div>
+    </div>
+
+    <div class="list-group col-md-4"><h4 align="center">Pagina curenta :</h4>
       <h4></h4>
       <h4 align="center">{{currentLocation}}</h4></div>
 
@@ -71,8 +72,20 @@
         <h4 align="center">Alegeti urmatoarea pagina :</h4>
         <div class="list-group-item" style="cursor:pointer;" ng-repeat="link in links track by $index" ng-click="choice(link);">{{link}}</div>
       </div>
-     
-      
-</div>
+
+
+    </div>
+  </div>
+  <div ng-show="playing === false">
+    <div class="container">
+    <div class="jumbotron">
+      <div align="center">
+      <h1>FELICITARI!</h1>
+      <h3>Ai castigat!</h3>
+      <input type="button" class="btn btn-primary btn-lg" value="START" ng-click="restart();"/>
+      </div>
+    </div>
+    </div>
+  </div>
 </body>
 </html>

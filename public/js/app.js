@@ -13,6 +13,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.destination="";
 	$scope.visited=[];
 	$scope.currentLocation='';
+	$scope.playing = false;
 
 	var pleaseWaitDiv = $('<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header"><h1>Processing...</h1></div><div class="modal-body"><div class="progress-bar"></div></div></div>');
 
@@ -42,7 +43,6 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 
 	}
 	$scope.addOption = addOption;
-	// start;
 
 	function hideButton(){
 		$scope.showOptimumDistance = true;
@@ -74,6 +74,13 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
         $scope.visited.push(link);
 	}
 	$scope.choice = choice;
+
+	function restart(){
+		$scope.playing = true;
+
+		this.start();
+	}
+	$scope.restart = restart;
 
 	window.sc = $scope;
 }]);
