@@ -1,7 +1,7 @@
 class WikiController < ActionController::Base
 	def get_id(title)
 		# params_id = params[:name]
-		Article.where(:title => title).map(&:id)
+		Article.where(:title => title).map(&:id)[0]
 
 	end
 
@@ -11,7 +11,7 @@ class WikiController < ActionController::Base
 
 	def get_name(id)
 		# params_id = params[:id].to_i
-		Article.where(:id => id).map(&:title)
+		Article.where(:id => id).map(&:title)[0]
 	end
 
 	def get_random_entry ()
@@ -82,7 +82,8 @@ class WikiController < ActionController::Base
 
 		endPoint = get_name(links[randomNumber])
 		@list_name = [startPoint, endPoint]
-		render :json => {:names =>@list_name, :links => @link_name}
+		@distance = bfs(get_id(startPoint).to_i, links[randomNumber].to_i)
+		render :json => {:names =>@list_name, :links => @link_name, :distance => @distance}
 	end
 
 
@@ -119,6 +120,10 @@ class WikiController < ActionController::Base
 	end
 
 	def bfs (startId, endId)
+		puts "ASdadasdasa"
+		puts startId
+		puts endId
+		puts "asdasddasdsdasdas"
 		hash = Array.new(5000);
 		queue = Array.new;
 
