@@ -48,7 +48,7 @@
     </div>
 </div>
   <div style="height:50px">
-      <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:60%;top:25%;"> Distanta parcursa : {{currentDistance}}</div>
+      <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:60%;top:25%;font-size:16px;"> Distanta parcursa : {{currentDistance}}</div>
 
       <button type="button" class="btn btn-default btn-lg" ng-show="showOptimumDistance === false" ng-click="hideButton();" style="background-color:#466a6b;color:#e8dc9e;background-color:#466a6b;color:#e8dc9e;font-size:16px;font-style:italic;font-family:'Metamorphous';text-align:center;">
   <span class="glyphicon glyphicon-search" aria-hidden="true"> Distanta minima</span> 
@@ -71,8 +71,6 @@
         <h4 align="center">Alegeti urmatoarea pagina :</h4>
         <div class="list-group-item" style="cursor:pointer;" ng-repeat="link in links track by $index" ng-click="choice(link);">{{link}}</div>
       </div>
-     
-      
 </div>
 </body>
 </html>
