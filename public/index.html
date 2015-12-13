@@ -41,14 +41,7 @@
       <div>
         <div style="cursor:pointer;" ng-repeat="link in links track by $index" ng-click="choice(link[0]);">{{link[0]}}</div>
       </div>
-      <div>
-        <div style="position:absolute;left:10%;top:35%;">
-        <form>
-        <input type="text" autofocus ng-model="searchInput" >
-        <button ng-click="addOption();"> Ok </button>
-        </form>
-        </div>
-      </div>
+      
       <div style="font-size:17px;font-weight:bold;font-family:'Metamorphous';position:absolute;left:70%;top:53%;"> Distanta parcursa : {{currentDistance}}</div>
       
       <button style="border-top-left-radius:3px;border-top-right-radius:3px;border-bottom-right-radius:3px;border-bottom-left-radius:3px;border-color:#dddddd;border-style:solid;background-color:#466a6b;color:#e8dc9e;font-size:16px;font-style:italic;font-family:'Metamorphous';text-align:center;padding-top:6px;padding-right:10px;padding-bottom:6px;padding-left:10px;left:10%;top:50%;position:absolute;width:170px;height:50px;text-align:center" ng-show="showOptimumDistance === false" ng-click="hideButton();"> Distanta minima </button> 
