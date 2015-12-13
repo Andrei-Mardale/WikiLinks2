@@ -4,9 +4,8 @@ var app = angular.module('WikiLinksApp', []);
 
 app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($scope, $timeout,$http){
 	$scope.currentlyViewing = 'startPage';
-	$scope.searchInput = '';
 	$scope.currentDistance = 0;
-	$scope.optimumDistance = 5;
+	$scope.optimumDistance = 0;
 	$scope.showOptimumDistance = false;
 	$scope.links  = [];
 	$scope.source="";
@@ -18,6 +17,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.shortDist=[];
 	$scope.corect = 0;
 
+	$scope.chosen = [];
 	var pleaseWaitDiv = $('<div class="modal" id="pleaseWaitDialog" data-backdrop="static" data-keyboard="false"><div class="modal-header" style="color:white"><h1>Processing...</h1></div><div class="modal-body"><div class="progress-bar"></div></div></div>');
 
 	$scope.start = function(){
@@ -33,6 +33,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
             $scope.optimumDistance = data["distance"];
             console.log(data);
             $scope.shortDist = data["path"];
+
            	pleaseWaitDiv.modal('hide');
             $scope.currentLocation = $scope.source;
           })
@@ -73,8 +74,10 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 		//console.log('endpoint'+endpoint);
 		var i;
 		for (i = 0; i < $scope.shortDist.length; ++i) {
-			if (link === $scope.shortDist[i]) {
-				$scope.corect++;	
+			if (link === $scope.shortDist[i] && $scope.chosen[i] != 1 ) {
+				$scope.corect++;
+				$scope.chosen[i]=1;
+
 				break;
 			}
 		}
@@ -96,6 +99,7 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.choice = choice;
 
 	function restart(){
+<<<<<<< HEAD
 		$scope.searchInput = '';
 	$scope.currentDistance = 0;
 	$scope.optimumDistance = 5;
@@ -109,6 +113,22 @@ app.controller('WikiLinksController', ['$scope', '$timeout','$http', function($s
 	$scope.percentage = 0;
 	$scope.shortDist=[];
 	$scope.corect = 0;
+=======
+		$scope.playing = true;
+			$scope.currentDistance = 0;
+		$scope.optimumDistance = 0;
+		$scope.showOptimumDistance = false;
+		$scope.links  = [];
+		$scope.source="";
+		$scope.destination="";
+		$scope.visited=[];
+		$scope.currentLocation='';
+		$scope.playing = true;
+		$scope.percentage = 0;
+		$scope.shortDist=[];
+		$scope.corect = 0;
+		$scope.chosen = [];
+>>>>>>> da59da13dc2513669e8f7ba70462c3bf3329b3cc
 
 		this.start();
 	}
